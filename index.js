@@ -1,0 +1,14 @@
+import{S,a as q,i}from"./assets/vendor-DhpBV7YY.js";(function(){const o=document.createElement("link").relList;if(o&&o.supports&&o.supports("modulepreload"))return;for(const t of document.querySelectorAll('link[rel="modulepreload"]'))a(t);new MutationObserver(t=>{for(const n of t)if(n.type==="childList")for(const c of n.addedNodes)c.tagName==="LINK"&&c.rel==="modulepreload"&&a(c)}).observe(document,{childList:!0,subtree:!0});function r(t){const n={};return t.integrity&&(n.integrity=t.integrity),t.referrerPolicy&&(n.referrerPolicy=t.referrerPolicy),t.crossOrigin==="use-credentials"?n.credentials="include":t.crossOrigin==="anonymous"?n.credentials="omit":n.credentials="same-origin",n}function a(t){if(t.ep)return;t.ep=!0;const n=r(t);fetch(t.href,n)}})();const f=document.querySelector(".gallery"),m=document.querySelector(".loader");document.querySelector(".load-more");let l=new S(".gallery a");function y(e){const o=e.map(r=>`
+    <li class="gallery-item">
+      <a href="${r.largeImageURL}">
+        <img src="${r.webformatURL}" alt="${r.tags}" />
+      </a>
+      <ul class="image-info">
+        <li>👍 ${r.likes}</li>
+        <li>👁️ ${r.views}</li>
+        <li>💬 ${r.comments}</li>
+        <li>⬇️ ${r.downloads}</li>
+      </ul>
+    </li>
+  `).join("");f.insertAdjacentHTML("beforeend",o),l.refresh()}function P(){f.innerHTML=""}function g(){m.classList.add("visible")}function h(){m.classList.remove("visible")}function p(){const e=document.querySelector(".load-more");e&&(e.style.display="block")}function b(){const e=document.querySelector(".load-more");e&&(e.style.display="none")}function v(){l&&l.refresh()}function B(){const{height:e}=document.querySelector(".gallery-item").getBoundingClientRect();window.scrollBy({top:e*2,behavior:"smooth"})}const E="https://pixabay.com/api/",$="51328495-a86ced526e026cbb82b9515b0",x=15;async function L(e,o=1){const r={key:$,q:e,image_type:"photo",orientation:"horizontal",safesearch:!0,page:o,per_page:x};return(await q.get(E,{params:r})).data}let u="",s=1;const w=15;let d=0;const M=document.querySelector(".form"),O=document.querySelector('input[name="search-text"]'),A=document.querySelector(".load-more");b();M.addEventListener("submit",async e=>{e.preventDefault();const o=O.value.trim();if(!o){i.warning({message:"Please enter a search query."});return}u=o,s=1,P(),g();try{const r=await L(u,s),{hits:a,totalHits:t}=r;if(d=t,a.length===0){i.info({message:"Sorry, there are no images matching your search query. Please try again!"});return}y(a),d>s*w&&p()}catch{i.error({message:"Something went wrong. Please try again later."})}finally{h()}});A.addEventListener("click",async()=>{s+=1,g(),b();try{const e=await L(u,s),{hits:o}=e;y(o),v(),B(),s*w>=d?i.info({message:"We're sorry, but you've reached the end of search results."}):p()}catch{i.error({message:"Failed to load more images."})}finally{h()}});
+//# sourceMappingURL=index.js.map
