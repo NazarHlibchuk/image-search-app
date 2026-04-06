@@ -1,23 +1,38 @@
-name: Build and deploy to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main   # змініть на вашу гілку
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout 🛎️
-        uses: actions/checkout@v2.3.1
+      # 1️⃣ Клон репозиторію
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-      - name: Install and build 🔧
-        run: |
-          npm install
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+      # 2️⃣ Встановлення Node.js (якщо потрібен для вашого проєкту)
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          branch: gh-pages
-          folder: dist
+          node-version: '18'  # або ваша версія
+
+      # 3️⃣ Встановлення залежностей та збірка проєкту
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build  # або ваша команда збірки
+
+      # 4️⃣ Деплой на GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v5
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist   # або папка зі збіркою вашого сайту
+          force_orphan: true    # створює чисту гілку gh-pages
+          keep_files: false     # видаляє старі файли перед деплоєм
+
