@@ -1,0 +1,129 @@
+/**
+  |============================
+  | include css partials with
+  | default @import url()
+  |============================
+*/
+/* Common styles */
+@import url('./reset.css');
+@import url('./base.css');
+
+body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.form {
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input[type='text'] {
+  border: 1px solid #333;
+  padding: 8px;
+  width: 300px;
+  font-size: 16px;
+  border-radius: 8px;
+  border-color: #808080;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+input[type='text']:hover {
+  border: 1px solid #333;
+}
+
+input[type='text']:focus {
+  border-color: #4E75FF;
+  outline: none;
+}
+
+button {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #fff;
+}
+
+button:hover {
+  background-color: #6C8CFF;
+}
+
+.btn-search {
+  border: none;
+  background-color: #4E75FF;
+  border-radius: 8px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+.gallery-item {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.info {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border: 5px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+  display: none;
+}
+
+.loader.visible {
+  display: block;
+}
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+
+.load-more {
+  display: block;
+  margin: 40px auto;
+  padding: 12px 24px;
+  background-color: #4e75ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 250ms ease, transform 250ms ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
